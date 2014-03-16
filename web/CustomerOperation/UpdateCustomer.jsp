@@ -3,6 +3,8 @@
     Created on : Mar 9, 2014, 3:37:40 PM
     Author     : ridvan
 --%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.bilisimegitim.course.dao.entity.dao.CustomerDAO"%>
 <%@page import="com.bilisimegitim.course.dao.entity.entity.Customer" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -16,12 +18,38 @@
     <body bgcolor="red">
         <form method="POST" action="ShowPersonInfoForm.jsp">
         <%
-            String tckn = (request.getParameter("Tckn") == null ? "" : request.getParameter("Tckn"));
+            int num = -1;
+            String islem = request.getParameter("islem"); // Bunu nasıl alacagiz ????
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            System.out.println("tarih:"+request.getParameter("Dogum"));
+            Date dogumTarihi = sdf.parse(request.getParameter("Dogum"));
+            
+            Customer customer = new Customer();
+            customer.setTckn(request.getParameter("Tckn"));
+            customer.setIsim(request.getParameter("Isim"));
+            customer.setSoyad(request.getParameter("Soyad"));
+            customer.setDogum(dogumTarihi);
+            customer.setCinsiyet(request.getParameter("Cinsiyet"));
+            customer.setEvli(request.getParameter("Medeni_durum"));
+            customer.setEvadresi(request.getParameter("Ev_adresi"));
+            customer.setIsadresi(request.getParameter("Is_adresi"));
+            customer.setEmail(request.getParameter("Email"));
+            customer.setTel1(request.getParameter("Telefon1"));
+            customer.setTel2(request.getParameter("Telefon2"));
+            customer.setFax(request.getParameter("Fax"));
+            customer.setAciklamalar(request.getParameter("Acikla"));
 
-            Customer customer = null;
-            if (!tckn.equals("")) {
+// createCustomer getCustomer updateCustomer deleteCustomer            
+            if (!request.getParameter("Tckn").equals("")) {
                 CustomerDAO customerDAO = new CustomerDAO();
-                customer = customerDAO.getCustomers(tckn);
+                if (islem.equals("1") ) // insert
+                    num = customerDAO.createCustomer(customer.getTckn()); 
+                else if (islem.equals("2")) // show
+                    customer = customerDAO.getCustomer(customer.getTckn());
+                else if (islem.equals("3")) // update
+                    customer = customerDAO.updateCustomer(customer.getTckn());
+                else if (islem.equals("4")) // delete
+                    customer = customerDAO.deleteCustomer(customer.getTckn());
             }
         %>
             <h2>Kişisel Bilgileri Gösterme Formu </h2>
@@ -61,12 +89,12 @@
                 </tr>
                 <tr>
                     <td>* Ev Adresi : </td>
-                    <td><textarea rows="4" cols="17">
+                    <td><textarea name="Ev_adresi" rows="4" cols="17">
                         </textarea></td></td>
                 </tr>
                 <td> İş Adresi : </td>
 
-                <td><textarea rows="4" cols="17">
+                <td><textarea name="Is_adresi" ows="4" cols="17">
                     </textarea></td> 
                 </tr>
                 <tr>
@@ -75,19 +103,19 @@
                 </tr>
                 <tr>
                     <td>* Telefon1 : </td>
-                    <td><input type="text" name="Telefon1" /></td>
+                    <td><input name="Telefon1" type="text" name="Telefon1" /></td>
                 </tr>
                 <tr>
                     <td>Telefon2 : </td>
-                    <td><input type="text" name="Telefon2" /></td>
+                    <td><input name="Telefon2" type="text" name="Telefon2" /></td>
                 </tr>
                 <tr>
                     <td>Fax : </td>
-                    <td><input type="text" name="Fax" /></td>
+                    <td><input name="Fax" type="text" name="Fax" /></td>
                 </tr>
                 <tr>
                     <td>Açıklamalar : </td>
-                    <td><textarea rows="4" cols="17">
+                    <td><textarea name="Acikla" rows="4" cols="17">
                         </textarea></td>
                 </td><br>
                 </tr>

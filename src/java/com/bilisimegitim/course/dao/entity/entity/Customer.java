@@ -30,7 +30,7 @@ public class Customer {
     private String tel2;
     private String fax;
     private String aciklamalar;
-    private String deleted;
+    private String islem;
 
     public Customer() {
         
@@ -139,8 +139,7 @@ public class Customer {
     public String getAciklamalar() {
         return aciklamalar;
     }
-    public String deleteCustomer(String deleted) {
-        return this.deleted;
+    public String setCase(String islem) {
+        return this.islem;
     }
-            
 }

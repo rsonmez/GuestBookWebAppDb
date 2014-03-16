@@ -13,16 +13,40 @@
     </head>
     <style>
         body{
-            background-image:url("adipromohdpi_1440.png");}
+            background-image:url("adipromohdpi_1440.png");
+        }
     </style>            
+    <script type="text/javascript">
+        function yeniKayit(){
+            var tckn = document.getElementById("tckn").value;
+            var url = "CustomerOperation/UpdateCustomer.jsp?tckn="+tckn;
+            alert(url);
+            document.location.href = url;
+        }
+        function kayitGorme(){
+            var tckn = document.getElementById("tckn").value;
+            var url = "CustomerOperation/ShowCustomer.jsp?tckn="+tckn;
+            alert(url);
+            document.location.href = url;
+        }
+        function kayitSilme(){
+            var tckn = document.getElementById("tckn").value;
+            var url = "CustomerOperation/DeleteCustomer.jsp?tckn="+tckn;
+            alert(url);
+            document.location.href = url;
+        }
+    </script>
     <body>
+        
+        <input type="text" name="tckn" id="tckn" value=""/>
+        
         <br>
-        <a href="ShowInsertPersonInfoForm.jsp">Yeni Kayıt<b> Giriş </b> için tıklayın</a>
+        <input type="button" value="Yeni Kayıt" onclick="yeniKayit();" />
         </br>
-        <a href="ShowPersonInfoForm.jsp">Kayıt <b>Görme</b> için tıklayın</a>
+        <input type="button" value="Kayıt Görme" onclick="kayitGorme();" />
         </br>
-        <a href="ShowUpdatePersonInfoForm.jsp">Kayıt <b> Yenile </b> için tıklayın</a>
+        <input type="button" value="Kayıt Güncelleme" onclick="yeniKayit();"/>
         </br>
-        <a href="ShowDeletePersonInfoForm.jsp">Kayıt <b> Silme </b> için tıklayın</a>
+        <input type="button" value="Kayıt Silme" onclick="kayitSilme();" />
     </body>
 </html>

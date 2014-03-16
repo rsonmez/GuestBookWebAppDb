@@ -19,18 +19,18 @@ import java.util.Date;
  */
 public class CustomerDAO {
 
-    public Customer getCustomers(String tckn) throws Exception {
+    public Customer getCustomer(String tckn) throws Exception {
         Connection con = null;
         Customer customer = null;
         try {
-/*            
-            String url = "jdbc:postgresql://localhost:5432/CustomersDB";
-            String username = "postgres";
-            String password = "";
+            /*            
+             String url = "jdbc:postgresql://localhost:5432/CustomersDB";
+             String username = "postgres";
+             String password = "";
 
-            Class.forName("org.postgresql.Driver");
-            con = DriverManager.getConnection(url, username, password);
-*/
+             Class.forName("org.postgresql.Driver");
+             con = DriverManager.getConnection(url, username, password);
+             */
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/customerdb?zeroDateTimeBehavior=convertToNull", "root", "");
             String sqlStr = "select * from customer where tckn=?";
@@ -54,6 +54,7 @@ public class CustomerDAO {
                 customer.setTel2(rs.getString("tel2"));
                 customer.setFax(rs.getString("fax"));
                 customer.setAciklamalar(rs.getString("aciklama"));
+                customer.setCase("1");
             }
         } catch (ClassNotFoundException ex) {
             throw new Exception(ex);
@@ -71,9 +72,10 @@ public class CustomerDAO {
         return customer;
     }
 
-    public void createCustomers(String tckn, String nm, String fn) throws Exception {
+    public int createCustomer(String tckn) throws Exception {
         Connection con = null;
         Customer customer = null;
+        int updateCount = -1;
         try {
   //          String url = "jdbc:postgresql://localhost:5432/CustomersDB";
 //            String username = "postgres";
@@ -81,15 +83,16 @@ public class CustomerDAO {
 
 //            Class.forName("org.postgresql.Driver");
 //            con = DriverManager.getConnection(url, username, password);
-
+            String sqlStr = "INSERT INTO customer(tckn,isim,soyad,dogum,cinsiyet,evli,evadresi,isadresi,email,tel1,tel2,fax,aciklama) value (?,?,?,?,?,?,?,?,?,?,?,?,?)";
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/customerdb?zeroDateTimeBehavior=convertToNull", "root", "");
 //            String sqlStr = "select * from public.customer where tckn=?";
-            String sqlStr = "INSERT INTO customer(tckn,isim,soyad) value (?,?,?)";
+
             PreparedStatement pstmt = con.prepareStatement(sqlStr);
             pstmt.setString(1, tckn);
-            pstmt.executeUpdate();
-        
+
+            updateCount = pstmt.executeUpdate();
+
         } catch (ClassNotFoundException ex) {
             throw new Exception(ex);
         } catch (SQLException ex) {
@@ -103,24 +106,26 @@ public class CustomerDAO {
                 }
             }
         }
+        return updateCount;
     }
 
-    public Customer updateCustomers(String tckn, String nm, String fn) throws Exception {
+    public Customer updateCustomer(String tckn) throws Exception {
         Connection con = null;
-        Customer customers = null;
+        Customer customer = null;
 
         try {
-/*            
-            String url = "jdbc:postgresql://localhost:5432/CustomersDB";
-            String username = "postgres";
-            String password = "";
+            /*            
+             String url = "jdbc:postgresql://localhost:5432/CustomersDB";
+             String username = "postgres";
+             String password = "";
 
-            Class.forName("org.postgresql.Driver");
-            con = DriverManager.getConnection(url, username, password);
-*/
+             Class.forName("org.postgresql.Driver");
+             con = DriverManager.getConnection(url, username, password);
+             */
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/customerdb?zeroDateTimeBehavior=convertToNull", "root", "");
-            String sqlStr = "update * from customer where tckn=?,isim=?,soyad=?";
+            String sqlStr = "update * from customer where tckn=?,isim=?,soyad=?,dogum=?,cinsiyet=?,evli=?,evadresi=?,isadresi=?,email=?,tel1=?,tel2=?,fax=?,aciklama=?";
+//tckn=?,isim=?,soyad=?,dogum=?,cinsiyet=?,evli=?,evadresi=?,isadresi=?,email=?,tel1=?,tel2=?,fax=?,aciklama=?            
 //            String sqlStr = "select * from public.customer where tckn=?";
 
             PreparedStatement pstmt = con.prepareStatement(sqlStr);
@@ -139,7 +144,7 @@ public class CustomerDAO {
                 }
             }
         }
-        return customers;
+        return customer;
     }
     /*
      updateRow(); rs.next()
@@ -164,18 +169,18 @@ public class CustomerDAO {
      result.updateRow();        
      */
 
-    public Customer deleteCustomers(String tckn) throws Exception {
+    public Customer deleteCustomer(String tckn) throws Exception {
         Connection con = null;
         Customer customers = null;
         try {
-/*            
-            String url = "jdbc:postgresql://localhost:5432/CustomersDB";
-            String username = "postgres";
-            String password = "";
+            /*            
+             String url = "jdbc:postgresql://localhost:5432/CustomersDB";
+             String username = "postgres";
+             String password = "";
 
-            Class.forName("org.postgresql.Driver");
-            con = DriverManager.getConnection(url, username, password);
-*/
+             Class.forName("org.postgresql.Driver");
+             con = DriverManager.getConnection(url, username, password);
+             */
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/customerdb?zeroDateTimeBehavior=convertToNull", "root", "");
             String sqlStr = "delete from customer where tckn=?";
