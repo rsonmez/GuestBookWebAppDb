@@ -15,7 +15,7 @@
 
     <style>
         body{
-            background-image:url("adipromohdpi_1440.png");}
+            background-image:url("CustomerOperation/adipromohdpi_1440.png");}
         </style> 
         <form method="POST" action="login_control.jsp">
             <table style="margin: 0 auto;">

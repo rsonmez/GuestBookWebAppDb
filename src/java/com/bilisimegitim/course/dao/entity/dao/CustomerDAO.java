@@ -202,11 +202,5 @@ public class CustomerDAO {
             }
         }
         return customers;
-        /*
-         Statement statement = connection.createStatement();
-         String    sql       = "delete from people where id=123";
-         int rowsAffected    = statement.executeUpdate(sql);
-        
-         */
     }
 }

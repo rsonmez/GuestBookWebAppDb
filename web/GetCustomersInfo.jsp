@@ -19,7 +19,7 @@
 //        String tckn = "11111111111"; // Yalniz deneme için !!
 //        String isim;
         CustomerDAO customerDao = new CustomerDAO();
-        Customer customer = customerDao.getCustomers(tckn);
+        Customer customer = customerDao.getCustomer(tckn);
 
 //       session.setAttribute( "Tckn", customers.getTckn());
 //       session.setAttribute( "İsim", customers.getIsim());

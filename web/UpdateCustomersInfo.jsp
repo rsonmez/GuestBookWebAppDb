@@ -6,8 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*" %>
-<%@page import="com.bilisimegitim.course.dao.entity.dao.CustomersDAO" %>
-<%@page import="com.bilisimegitim.course.dao.entity.entity.Customers" %>
+<%@page import="com.bilisimegitim.course.dao.entity.dao.CustomerDAO" %>
+<%@page import="com.bilisimegitim.course.dao.entity.entity.Customer" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,12 +20,12 @@
             String isim = request.getParameter("Isim");
             String soyad = request.getParameter("Soyad");
             
-            CustomersDAO customersDao = new CustomersDAO();
-            Customers customers = customersDao.updateCustomers(tckn,isim,soyad);
+            CustomerDAO customersDao = new CustomerDAO();
+            Customer customer = customersDao.updateCustomer(tckn,isim,soyad);
 
     //       session.setAttribute( "Tckn", customers.getTckn());
     //       session.setAttribute( "İsim", customers.getIsim());
-            request.getSession(true).setAttribute("customerInfo", customers);
+            request.getSession(true).setAttribute("customerInfo", customer);
     //        request.getRequestDispatcher("/ShowPersonInfoForm.jsp").forward(request, response);        
             request.getRequestDispatcher("/ShowInfo.jsp").forward(request, response);
         %>

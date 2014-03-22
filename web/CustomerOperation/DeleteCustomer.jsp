@@ -10,14 +10,16 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <%
-            String tckn = request.getParameter("tckn");
+    <title>JSP Page</title>
+</head>
+<body>
+    <%
+        if (!request.getParameter("Tckn").equals("")) {
+            String tckn = request.getParameter("Tckn");
             CustomerDAO customerDAO = new CustomerDAO();
             customerDAO.deleteCustomer(tckn);
-            request.getRequestDispatcher("/AddOrSearchPerInfoForm").forward(request, response);
-        %>
-    </body>
+            request.getRequestDispatcher("/ShowPersonInfoForm").forward(request, response);
+            }
+    %>
+</body>
 </html>
