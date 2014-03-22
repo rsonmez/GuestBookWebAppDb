@@ -26,12 +26,12 @@
             CustomerDAO customerDAO = new CustomerDAO();
             Customer customer = customerDAO.getCustomer(tckn);
 
-            request.getSession(true).setAttribute("customerInfo", customer);
+ //           request.getSession(true).setAttribute("customerInfo", customer);
 //            request.getRequestDispatcher("/main_page.jsp").forward(request, response);
 
 //            Customer customer = (Customer) request.getSession(false).getAttribute("customerInfo");
 //                        Customer customer = customersDao.updateCustomer(tckn,isim,soyad);
-            tckn = null;
+            /*tckn = null;
             tckn = customer.getTckn();
             isim = customer.getIsim();
             soyad = customer.getSoyad();
@@ -46,8 +46,10 @@
             String tel1 = customer.getTel1();
             String tel2 = customer.getTel2();
             String fax = customer.getFax();
-            String aciklamalar = customer.getAciklamalar();
+            String aciklamalar = customer.getAciklamalar();*/
 
+            request.setAttribute("customerInfo", customer);
+            
 //            session.setAttribute( "Tckn", customer.getTckn());
             //           session.setAttribute( "İsim", customer.getIsim());
               request.getRequestDispatcher("/ShowInsertPersonInfoForm.jsp").forward(request, response);
